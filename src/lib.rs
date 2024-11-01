@@ -1,12 +1,11 @@
 // Traits
-trait Debug {
-    fn fmt() -> Result<(), ()>;
-}
 trait HasUp {
     type Up;
 }
 trait Container {
     type Output;
+
+    fn create() -> Result<(), ()>;
 }
 trait HasContainerType {
     type ContainerType;
@@ -33,13 +32,7 @@ where
     V::Up: HasContainerType<ContainerType: Container>,
 {
     type Output = Self;
-}
-impl<V> Debug for Up<V>
-where
-    V: HasUp,
-    V::Up: HasContainerType<ContainerType: Container>,
-{
-    fn fmt() -> Result<(), ()> {
+    fn create() -> Result<(), ()> {
         Ok(())
     }
 }
